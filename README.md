@@ -1,66 +1,72 @@
 # asus-panel-fix
 
-Arregla Armoury Crate cuando **cambiaste la pantalla de tu portátil ASUS** por una que no es la original.
+Fixes Armoury Crate when you **replaced the screen of your ASUS laptop** with one that is not the original.
 
-## Síntomas
+## Symptoms
 
-- GameVisual dice **"GameVisual puede que no se admita"**.
-- No aparece **"Ahorro de energía del panel"** (el cambio automático a 60 Hz con batería).
-- Las opciones de pantalla de Armoury Crate no se pueden activar.
+- GameVisual says **"GameVisual may not be supported"**.
+- **"Panel Power Saver"** (automatic switch to 60 Hz on battery) does not appear.
+- Display options in Armoury Crate cannot be turned on.
 
-## Causa
+## Cause
 
-ASUS identifica el panel por los datos de fábrica que trae (EDID: fabricante + modelo). Si tu panel no está en sus listas, el software lo ignora:
+ASUS identifies the panel by the factory data it reports (EDID: manufacturer + product code). If your panel is not in ASUS's lists, their software ignores it:
 
-1. **ASUS Smart Display Control** solo cambia los Hz con paneles que estén en
+1. **ASUS Smart Display Control** only switches refresh rates for panels listed in
    `C:\ProgramData\ASUS\ASUS Smart Display Control\FRQ_Config.txt`
-   (formato `fabricante,modelo,HzMax,HzMin`).
-2. **GameVisual** busca un perfil de color llamado `<MODELO>_<GPU>_<fabricante><producto>.icm`
-   (por ejemplo `FX517ZM_8086_CF260621.icm`). Si no existe, muestra el aviso y no abre.
-   Los registros de Armoury Crate lo dejan escrito: `ICM Exist: 0 ... ICM File need re-download`.
+   (format `manufacturer,product,maxHz,minHz`).
+2. **GameVisual** looks for a colour profile named `<MODEL>_<GPU>_<manufacturer><product>.icm`
+   (for example `FX517ZM_8086_CF260621.icm`). If it does not exist, it shows the warning and does not open.
+   The Armoury Crate log records it: `ICM Exist: 0 ... ICM File need re-download`.
 
-## Qué hace el script
+## What the script does
 
-`Fix-AsusPanel.ps1` lee el EDID de tu pantalla interna y:
+`Fix-AsusPanel.ps1` reads the EDID of your internal display and:
 
-- agrega tu panel a `FRQ_Config.txt` (guarda antes una copia en la carpeta `respaldo\`),
-- crea el perfil `.icm` que GameVisual espera, **copiando uno que ya existe en tu equipo**.
+- adds your panel to `FRQ_Config.txt` (a backup copy is saved first in the `backup\` folder),
+- creates the `.icm` profile GameVisual expects, **copying one that already exists on your laptop**.
 
-No incluye ni descarga archivos de ASUS.
+It does not include or download any ASUS files.
 
-## Uso
+## Usage
 
-1. Abre PowerShell **como administrador**.
-2. Primero mira qué haría, sin cambiar nada:
+1. Open PowerShell **as administrator**.
+2. First, preview what it would do without changing anything:
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\Fix-AsusPanel.ps1 -DryRun
    ```
 
-3. Si los datos del panel (fabricante, producto, Hz) son correctos, aplícalo:
+3. If the panel data (manufacturer, product, Hz) looks right, apply it:
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\Fix-AsusPanel.ps1
    ```
 
-4. Reinicia el equipo.
+4. Restart the laptop.
 
-Para deshacerlo:
+To undo:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\Fix-AsusPanel.ps1 -Undo
 ```
 
-Opciones: `-MaxHz 144` (si no se detecta bien) y `-SourceIcm "ruta\perfil.icm"` (perfil a copiar).
+Options: `-MaxHz 144` (if detection fails) and `-SourceIcm "path\profile.icm"` (profile to copy).
 
-## Avisos
+## Use it with Claude Code
 
-- **El perfil de color no está calibrado para tu panel.** Es de otro panel, así que GameVisual funciona pero los colores de sus modos no serán exactos.
-- Probado en **un solo equipo**: ASUS TUF Dash F15 (FX517ZM) con panel InfoVision `IVO0621`. Otros modelos pueden comportarse distinto.
-- Una actualización de Armoury Crate puede reescribir `FRQ_Config.txt`; si pasa, vuelve a ejecutar el script.
-- No es un proyecto oficial de ASUS. Úsalo bajo tu propio riesgo.
-- El script **no** arregla Night Light de Windows.
+This repo includes a Claude Code skill (`.claude/skills/asus-panel-fix`). Open the cloned repo with Claude Code
+and ask, for example, "fix my ASUS replaced screen, GameVisual says it is not supported". Claude previews the
+change, asks for your confirmation, and applies it (you still approve the Windows administrator prompt).
 
-## Licencia
+## Warnings
 
-MIT. Ver [LICENSE](LICENSE).
+- **The colour profile is not calibrated for your panel.** It comes from another panel, so GameVisual works but the colours of its modes will not be exact.
+- Tested on **one laptop only**: ASUS TUF Dash F15 (FX517ZM) with an InfoVision `IVO0621` panel. Other models may behave differently.
+- An Armoury Crate update may rewrite `FRQ_Config.txt`; if that happens, run the script again.
+- Not an official ASUS project. Use at your own risk.
+- The script does **not** fix Windows Night Light.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

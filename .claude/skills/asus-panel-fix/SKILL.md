@@ -19,7 +19,7 @@ Windows only. Read the README first for the cause and warnings.
 3. **Tell the user before applying:**
    - The colour profile is copied from another panel, so GameVisual colours will not be exact.
    - Tested on one laptop only (TUF Dash F15 FX517ZM).
-   - A backup of `FRQ_Config.txt` is saved in `respaldo\`; `-Undo` reverses everything.
+   - A backup of `FRQ_Config.txt` is saved in `backup\`; `-Undo` reverses everything.
    Get a clear yes.
 4. **Apply with admin rights.** The user must approve the Windows UAC prompt; do not try to bypass it:
    `Start-Process powershell.exe -Verb RunAs -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','"<repo>\Fix-AsusPanel.ps1"'`
