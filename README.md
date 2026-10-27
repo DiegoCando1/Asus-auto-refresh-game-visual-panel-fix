@@ -5,7 +5,7 @@ Fixes Armoury Crate when you **replaced the screen of your ASUS laptop** with on
 ## Symptoms
 
 - GameVisual says **"GameVisual may not be supported"**.
-- **"Panel Power Saver"** (automatic switch to 60 Hz on battery) does not appear.
+- **"Panel Power Saver"** (automatic switch to 60 Hz on battery) can be selected but does nothing: the refresh rate never changes.
 - Display options in Armoury Crate cannot be turned on.
 
 ## Cause

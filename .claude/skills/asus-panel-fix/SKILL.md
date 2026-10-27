@@ -1,6 +1,6 @@
 ---
 name: asus-panel-fix
-description: Fixes Armoury Crate on ASUS laptops whose screen was replaced - "GameVisual may not be supported", missing "Panel Power Saver" (auto 60 Hz on battery). Use when the user mentions a replaced/new ASUS laptop panel with those symptoms.
+description: Fixes Armoury Crate on ASUS laptops whose screen was replaced - "GameVisual may not be supported", "Panel Power Saver" (auto 60 Hz on battery) does nothing when selected. Use when the user mentions a replaced/new ASUS laptop panel with those symptoms.
 ---
 
 # asus-panel-fix
@@ -11,7 +11,7 @@ Windows only. Read the README first for the cause and warnings.
 ## Steps
 
 1. **Confirm the symptom.** Ask which applies: GameVisual says "may not be supported", or "Panel Power Saver"
-   is missing in Armoury Crate. If neither, this skill does not apply.
+   does nothing when selected (the refresh rate never drops on battery). If neither, this skill does not apply.
 2. **Dry run (no admin, changes nothing):**
    `powershell -ExecutionPolicy Bypass -File <repo>\Fix-AsusPanel.ps1 -DryRun`
    Show the user the detected manufacturer, product, max Hz and model. If Hz max or model look wrong,
@@ -26,7 +26,7 @@ Windows only. Read the README first for the cause and warnings.
 5. **Verify the files exist** (`FRQ_Config.txt` last line, `*_<mfr><prod>.icm` in
    `C:\ProgramData\ASUS\GameVisual`). Then ask the user to restart.
 6. **After restart, check, don't assume.** Ask the user whether GameVisual opens and whether
-   "Panel Power Saver" appears. Optionally confirm in the Armoury Crate log
+   "Panel Power Saver" now switches the refresh rate when the charger is unplugged. Optionally confirm in the Armoury Crate log
    (`%LOCALAPPDATA%\ASUS\ARMOURY CRATE Diagnosis\AppLog\ArmouryCrate.UserSessionHelper_*.log`):
    the line `ICM Exist: 1` means the profile is found.
 

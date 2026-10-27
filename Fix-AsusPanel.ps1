@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   After replacing the screen of an ASUS laptop, Armoury Crate shows "GameVisual may not be
-  supported" and does not offer "Panel Power Saver". The reasons:
+  supported" and "Panel Power Saver" can be selected but does nothing. The reasons:
     1. ASUS Smart Display Control only switches refresh rates for panels in its list (FRQ_Config.txt).
     2. GameVisual looks for a colour profile named <MODEL>_<GPU>_<MANUFACTURER><PRODUCT>.icm.
 
