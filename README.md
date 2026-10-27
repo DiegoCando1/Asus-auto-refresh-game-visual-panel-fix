@@ -1,11 +1,11 @@
 # asus-panel-fix
 
-Fixes Armoury Crate when you **replaced the screen of your ASUS laptop** with one that is not the original.
+Fixes Armoury Crate when you **replaced the screen of your ASUS laptop** with one that is not the original: GameVisual "may not be supported" and Panel Power Saver (auto 60 Hz on battery) doing nothing. Tested on a TUF Dash F15 (FX517ZM).
 
 ## Symptoms
 
 - GameVisual says **"GameVisual may not be supported"**.
-- **"Panel Power Saver"** (automatic switch to 60 Hz on battery) can be selected but does nothing: the refresh rate never changes.
+- **Armoury Crate > Devices > System Settings > Panel Power Saver** (the "AUTO HZ" tile, which switches to 60 Hz on battery) can be selected but does nothing: the refresh rate never changes.
 - Display options in Armoury Crate cannot be turned on.
 
 ## Cause
